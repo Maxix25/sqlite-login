@@ -47,11 +47,32 @@ def query():
 	list = cursor.fetchall()
 	if username in list[0] and password in list[0]:
 		print("Access Granted!")
-		return True
 	else:
 		print("Acces Denied :(")
 		return False
-
+	print(
+		"Select what do you want to see\n",
+		"[1] Usernames\n",
+		"[2] Passwords\n",
+		"[3] IsRoot\n",
+		"[4] All"
+		)
+	choice = option(4)
+	if choice == 1:
+		cursor.execute("SELECT USERNAME FROM LOGIN")
+	elif choice == 2:
+		cursor.execute("SELECT USERNAME, PASSWORD FROM LOGIN")
+		print("USERNAME PASSWORD")
+	elif choice == 3:
+		cursor.execute("SELECT USERNAME, ROOT FROM LOGIN")
+		print("USERNAME ISROOT")
+	elif choice == 4:
+		cursor.execute("SELECT * FROM LOGIN")
+	list = cursor.fetchall()
+	for object in list:
+		print(object)
+	
+	
 def root():
 	username = input("Enter the root's username: ")
 	password = getpass("Enter the root's password: ")

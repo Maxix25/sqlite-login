@@ -1,13 +1,12 @@
 import sqlite3
-from getpass import getpass
 from functions import option
 db = sqlite3.connect("Login")
 cursor = db.cursor()
 def register():
 	try:
 		username = input("Input username: ")
-		password = getpass("Create a password: ")
-		password_confirm = getpass("Confirm password: ")
+		password = input("Create a password: ")
+		password_confirm = input("Confirm password: ")
 		if password == password_confirm:
 			cursor.execute("INSERT INTO LOGIN VALUES (?, ?, NULL, 'NO')", (username, password))
 			print("Username created correctly!")
@@ -30,9 +29,10 @@ def register():
 
 def login():
 	username = input("Username: ")
-	password = getpass("Password: ")
-	cursor.execute("SELECT * FROM LOGIN WHERE USERNAME=(?) AND PASSWORD=(?)", (username, password))
+	password = input("Password: ")
+	cursor.execute('SELECT * FROM LOGIN WHERE USERNAME ="' + username + '" AND PASSWORD ="' + password + '" LIMIT 1')
 	list = cursor.fetchall()
+	print(list)
 	if len(list) <= 0:
 		print("Username or password incorrect!")
 		choice = input("Try again? [Y/n]")
@@ -40,9 +40,11 @@ def login():
 			login()
 		elif choice.lower() == "n":
 			return
+	else:
+		print("Access Granted! :)")
 def query():
 	username = input("Introduce the root's username: ")
-	password = getpass("Introduce the root's password: ")
+	password = input("Introduce the root's password: ")
 	cursor.execute("SELECT * FROM LOGIN WHERE ROOT = 'YES'")
 	list = cursor.fetchall()
 	if username in list[0] and password in list[0]:
@@ -75,7 +77,7 @@ def query():
 	
 def root():
 	username = input("Enter the root's username: ")
-	password = getpass("Enter the root's password: ")
+	password = input("Enter the root's password: ")
 	cursor.execute("INSERT INTO LOGIN VALUES(?, ?, NULL, 'YES')", (username, password))
 	print("Root user created succesfully!")
 
@@ -95,7 +97,7 @@ if len(list) == 0:
 
 """
 username = input("Enter username: ")
-password = getpass("Enter password: ")
+password = input("Enter password: ")
 cursor.execute("INSERT INTO LOGIN VALUES(?, ?, NULL)", (username, password))
 """
 print(

@@ -30,7 +30,8 @@ def register():
 def login():
 	username = input("Username: ")
 	password = input("Password: ")
-	cursor.execute('SELECT * FROM LOGIN WHERE USERNAME ="' + username + '" AND PASSWORD ="' + password + '" LIMIT 1')
+	db.set_trace_callback(print)
+	cursor.execute('SELECT * FROM LOGIN WHERE USERNAME ="' + username + '" AND PASSWORD ="' + password + '"')
 	list = cursor.fetchall()
 	print(list)
 	if len(list) <= 0:
@@ -114,5 +115,6 @@ elif choice == 2:
 
 elif choice == 3:
 	query()
+
 db.commit()
 db.close()

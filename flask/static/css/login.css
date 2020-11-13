@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Register</title>
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
-</head>
-<body>
-<!--
-<style>
-html {
+ html {
   background-color: #56baed;
 }
 
@@ -281,32 +272,4 @@ input[type=text], input[type=password]:placeholder {
   padding: 8px;
   background-color: green;
   color: white;
-}
-</style>
--->
-
-{% for category, message in get_flashed_messages() %}
-      <div class="{{ category }}">Error: {{ message }}</div>
-{% endfor %}
-
-	  <div class="wrapper fadeInDown">
-    <div id="formContent">
-      <!-- Tabs Titles -->
-
-      <!-- Icon -->
-      <div class="fadeIn first">
-        <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-      </div>
-
-      <!-- Login Form -->
-      <form action="#" method="post">
-        <input type="text" id="login" class="fadeIn second" name="username" placeholder="Username">
-        <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
-        <input type="password" name="password" class="fadeIn forth" name="password_confirm" placeholder="Confirm Password">
-        <input type="submit" class="fadeIn fourth" value="Log In">
-      </form>
-    </div>
-  </div>	
-
-</body>
-</html>
+} 
